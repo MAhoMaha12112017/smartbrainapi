@@ -82,7 +82,7 @@ app.post('/register', (req, res) => {
   database.users.push({
     name: name,
     email: email,
-    password: password,
+    password: password, // eikö tosiaan tarvi?
     id: 125,
     entries: 0,
     joined: new Date()
