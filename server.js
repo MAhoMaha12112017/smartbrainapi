@@ -12,7 +12,7 @@ const database = {
       id: '123',
       name: 'John',
       email: 'john@email.com',
-      password: 'cookies',
+       password: 'cookies',
       entries: 0,
       joined: new Date()
     },
@@ -20,7 +20,7 @@ const database = {
       id: '124',
       name: 'Sally',
       email: 'sally@email.com',
-      password: 'babanas',
+      password: 'bananas',
       entries: 0,
       joined: new Date()
     }
@@ -69,6 +69,7 @@ app.post('/signin', (req, res) => {
       req.body.password === database.users[0].password) {
     console.log('signin ok');
     res.json(database.users[0]); // res.status(200).json('success');
+//    res.send('signed in');
   } else {
     console.log('signin not ok');
     res.status(400).json('error logging in');
