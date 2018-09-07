@@ -1,10 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const knex = require('knex')
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+const db = knex({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : 'kissanpierut66',
+    database : 'smart-brain'
+  }
+});
+
+console.log(db.select('*').from('users'));
+
+
 
 const database = {
   users: [
@@ -67,7 +82,6 @@ app.put('/image/:id', (req, res) => {
 app.post('/signin', (req, res) => {
   if (req.body.email === database.users[0].email && 
       req.body.password === database.users[0].password) {
-    console.log('signin ok');
     res.json(database.users[0]); // res.status(200).json('success');
 //    res.send('signed in');
   } else {
