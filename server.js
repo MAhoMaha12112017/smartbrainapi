@@ -17,9 +17,9 @@ const db = knex({
   }
 });
 
-console.log(db.select('*').from('users'));
-
-
+db.select('*')
+    .from('users')
+    .then(data => console.log(data));
 
 const database = {
   users: [
@@ -94,15 +94,15 @@ app.post('/signin', (req, res) => {
 app.post('/register', (req, res) => {
   console.log(req.body);
   const {name, email, password} = req.body;
-  database.users.push({
+  db('users')
+    .returning('*')
+    .insert({
     name: name,
     email: email,
-    password: password, // eikö tosiaan tarvi?
-    id: 125,
-    entries: 0,
     joined: new Date()
   })
-  res.status(200).json(database.users[database.users.length - 1]);
+  .then(user => res.json(user[0]))
+  .catch(err => res.status(400).json('unable to register'));
 });
 
 app.listen(3000, () => {
