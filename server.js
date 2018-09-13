@@ -22,7 +22,7 @@ const db = knex({
   }
 });
 
-app.get('/', (req, res) => res.send(database.users));
+app.get('/', (req, res) => res.send('it is working'));
 app.get('/profile/:id', (req, res) => profile.handleProfileGet(req, res, db));
 app.put('/image/:id', (req, res) => image.handleImage(req, res, db));
 //app.put('/image', (req, res) => image.handleImage(req, res, db));
@@ -31,5 +31,5 @@ app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcryp
 app.post('/imageurl', (req, res) => image.handleApiCall(req, res));
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('app is running on port {process.env.PORT}');
+  console.log(`app is running on port {process.env.PORT}´);
 });
